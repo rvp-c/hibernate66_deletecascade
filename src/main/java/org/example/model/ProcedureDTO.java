@@ -2,7 +2,6 @@ package org.example.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -37,7 +36,7 @@ public class ProcedureDTO {
 //  @CreationTimestamp
   Instant createdAt;
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany
   @JoinTable(
       name = "documentation_unit_procedure",
       inverseJoinColumns = @JoinColumn(name = "documentation_unit_id"),

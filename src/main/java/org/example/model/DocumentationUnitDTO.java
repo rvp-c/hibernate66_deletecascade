@@ -3,14 +3,14 @@ package org.example.model;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -39,6 +39,11 @@ public class DocumentationUnitDTO {
 
   @Id @GeneratedValue @Include private UUID id;
 
+  @Column(nullable = false, unique = true, updatable = false, name = "document_number")
+  @NotBlank
+  @Include
+  private String documentNumber;
+
   @OneToMany(
       mappedBy = "documentationUnit",
       orphanRemoval = true,
@@ -46,4 +51,16 @@ public class DocumentationUnitDTO {
   @OrderBy("rank")
   @Builder.Default
   private List<DocumentationUnitProcedureDTO> procedures = new ArrayList<>();
+
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+  @JoinColumn(name = "documentation_unit_id", nullable = false)
+  @Builder.Default
+  @OrderBy("rank")
+  private List<EnsuingDecisionDTO> ensuingDecisions = new ArrayList<>();
+
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+  @JoinColumn(name = "documentation_unit_id", nullable = false)
+  @Builder.Default
+  @OrderBy("rank")
+  private List<PendingDecisionDTO> pendingDecisions = new ArrayList<>();
 }

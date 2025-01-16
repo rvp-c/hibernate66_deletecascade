@@ -11,6 +11,8 @@
     <class>org.example.model.DocumentationUnitDTO</class>
     <class>org.example.model.DocumentationUnitProcedureDTO</class>
     <class>org.example.model.ProcedureDTO</class>
+    <class>org.example.model.EnsuingDecisionDTO</class>
+    <class>org.example.model.PendingDecisionDTO</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
     <properties>
